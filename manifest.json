@@ -1,0 +1,14 @@
+{
+    "name": "Speech input at DeepL",
+    "version": "1.0.0",
+    "manifest_version": 2,
+    "description": "DeepL translateで音声入力を行えるようにする",
+    "content_scripts": [
+        {
+            "matches": ["https://www.deepl.com/translator*"],
+            "js": ["jquery-3.6.1.min.js", "toastr.min.js", "script.js"],
+            "css": ["toastr.min.css"],
+            "run_at": "document_start"
+        }
+    ]
+}
