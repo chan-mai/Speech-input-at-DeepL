@@ -21,7 +21,6 @@ toastr.options = {
 SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
 let recognition = new SpeechRecognition();
 
-recognition.lang = 'ja-JP';
 recognition.interimResults = true;
 recognition.continuous = true;
 
@@ -31,7 +30,7 @@ enable_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fil
 
 $(function () {
     //音声入力の開始ボタンを追加
-    $(".lmt__language_container").eq(0).append('<div><button class="mic_inp"></button></div>');
+    $(".lmt__language_container").eq(0).append('<div><button class="mic_inp"></button>&nbsp;<button class="mic_inp mic_inp_text"></button></div>');
     $(".mic_inp").eq(0).append(disable_svg);
     $(".dl_header_menu_v2__links__item").eq(-1).remove();
     $(".dl_header_menu_v2__links__item").eq(-2).remove();
@@ -39,6 +38,8 @@ $(function () {
     $(".dl_header_menu_v2__links").append('<a class="dl_header_menu_v2__links__item dl_navigate_away" id="dl_menu_apps" style="display: flex;" href="/app"><span class="dl_headerMenu__itemWithBadge">Speech input at DeepL<span id="apps-link-free-badge" style="display: block;" class="dl_headerMenu__freeBadge">GitHub</span></span></a>');
     //css
     $(".mic_inp").css("color", "#ff0000");
+    //テキスト
+    $(".mic_inp_text").eq(0).text("開始");
 
     let finalTranscript = ''; //確定した認識結果
 
@@ -82,8 +83,9 @@ $(function () {
             $(".lmt__source_textarea").addClass("lmt__textarea");
             $(".lmt__source_textarea").addClass("lmt__textarea_base_style");
             $(".lmt__source_textarea").addClass("df2937__textareaPointer--sup2M");
-            //css
-            $("body").css("border-radius", "10px");
+            //テキストの変更
+            $(".mic_inp_text").eq(0).empty();
+            $(".mic_inp_text").eq(0).text("終了");
         }else{
             //音声入力終了
             console.log("音声入力終了");
@@ -92,6 +94,9 @@ $(function () {
             //svgの変更
             $(".mic_inp").eq(0).empty();
             $(".mic_inp").eq(0).append(disable_svg);
+            //テキストの変更
+            $(".mic_inp_text").eq(0).empty();
+            $(".mic_inp_text").eq(0).text("開始");
         }
     });
 });
