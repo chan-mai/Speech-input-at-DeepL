@@ -1,7 +1,7 @@
 {
     "name": "Speech input at DeepL",
     "version": "1.0.0",
-    "manifest_version": 2,
+    "manifest_version": 3,
     "description": "DeepL translateで音声入力を行えるようにする",
     "content_scripts": [
         {
