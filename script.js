@@ -18,9 +18,37 @@ toastr.options = {
     "hideMethod": "fadeOut"
 }
 
+//言語配列
+var lang = new Array();
+lang["アラビア語"] = "ar-SA";
+lang["中国語"] = "zh-CN";
+lang["クロアチア語"] = "hr-HR";
+lang["チェコ語"] = "cs-CZ";
+lang["デンマーク語"] = "da-DK";
+lang["オランダ語"] = "nl-NL";
+lang["英語"] = "en-US";
+lang["フィンランド語"] = "fi-FI";
+lang["フランス語"] = "fr-FR";
+lang["ドイツ語"] = "de-DE";
+lang["ギリシャ語"] = "el-GR";
+lang["ハンガリー語"] = "hu-HU";
+lang["アイスランド語"] = "is-IS";
+lang["インドネシア語"] = "id-ID";
+lang["イタリア語"] = "it-IT";
+lang["日本語"] = "ja-JP";
+lang["韓国語"] = "ko-KR";
+lang["リトアニア語"] = "lt-LT";
+lang["マレー語"] = "ms-MY";
+lang["ノルウェー語"] = "nb-NO";
+lang["ポーランド語"] = "pl-PL";
+lang["ポルトガル語"] = "pt-PT";
+lang["ロシア語"] = "ru-RU";
+lang["スペイン語"] = "es-MX";
+
 SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
 let recognition = new SpeechRecognition();
 
+recognition.lang = lang["日本語"];
 recognition.interimResults = true;
 recognition.continuous = true;
 
@@ -67,6 +95,17 @@ $(function () {
 
     //音声入力の開始ボタンを押したときの処理
     $(".mic_inp").click(function () {
+        console.log($("strong").eq(0).text());
+        //言語配列に該当があるか
+        if (lang.indexOf($("strong").eq(0).text()) != -1) {
+            //言語を設定
+            recognition.lang = lang[$("strong").eq(0).text()];
+            console.log("言語変更 : "+lang[$("strong").eq(0).text()]);
+        } else {
+                //該当なしなら日本語
+                recognition.lang = lang["日本語"];
+                console.log("言語変更なし");
+        }
         push_cnt++;
         //入力開始と終了の判定
         if (push_cnt % 2 == 1) {
@@ -99,4 +138,6 @@ $(function () {
             $(".mic_inp_text").eq(0).text("開始");
         }
     });
+
+        
 });
